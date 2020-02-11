@@ -5,10 +5,24 @@ const app = express();
 
 app.use((req, res, next) => {
     res.show = (name) => {
-        res.sendFile(path.join(__dirname + 'views/$(name'));
+        res.sendFile(path.join(__dirname + `/views/${name}`));
     };
     next();
 });
+
+app.get('/', (req, res) => {
+    res.show('home.html');
+});
+
+app.get('/home', (req, res) => {
+    res.show('home.html');
+});
+
+app.get('/about', (req, res) => {
+    res.show('about.html');
+});
+
+
 
 app.use((req, res) => {
     res.status(404).send('404 not found...');
