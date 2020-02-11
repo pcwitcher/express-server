@@ -10,6 +10,10 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use('/user', (req, res, next) => {
+    res.show('forbidden.html');
+});
+
 app.get('/', (req, res) => {
     res.show('home.html');
 });
@@ -22,10 +26,12 @@ app.get('/about', (req, res) => {
     res.show('about.html');
 });
 
-
+app.get('/public/404.jpg', (req, res) => {
+    res.sendFile(path.join(__dirname + '/public/404.jpg'));
+});
 
 app.use((req, res) => {
-    res.status(404).send('404 not found...');
+    res.status(404).show('404.html');
 });
 
 app.listen(8000, () => {
